@@ -10,11 +10,13 @@ def right_path(start_row, start_col, matrix):
     right_coordinates = []
     while start_col < size:
         if matrix[start_row][start_col] == 'X':
-            return False
+            break
         sum_right += (int(matrix[start_row][start_col]))
         right_coordinates.append([start_row,start_col])
 
-    return sum_right,right_coordinates
+        start_col += 1
+
+    return 'right',sum_right,right_coordinates
 
 
 size = int(input())
@@ -26,6 +28,15 @@ for _ in range(size):
 
 bunny_row, bunny_col = find_bunny(matrix)
 
+best_score = 0
 
+best_path = None
 
-if right_path(start_row, start_col+1, matrix):
+if right_path(bunny_row, bunny_col+1, matrix):
+    sum_path, path_coordinates = right_path(bunny_row, bunny_col+1, matrix)
+
+    if sum_path > best_score:
+        best_score = sum_path
+        best_path = path_coordinates
+print(best_score)
+print(best_path)
