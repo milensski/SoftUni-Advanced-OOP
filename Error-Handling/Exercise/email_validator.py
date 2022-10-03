@@ -29,12 +29,12 @@ while True:
 
     read_email = input()
 
+    if read_email == "End":
+        break
+
     name = re.search(pattern_name, read_email)
 
     domain = re.search(pattern_domain, read_email)
-
-    if read_email == "End":
-        break
 
     if len(name.group()) <= 4:
         raise NameTooShortError('Name must be more than 4 characters')
