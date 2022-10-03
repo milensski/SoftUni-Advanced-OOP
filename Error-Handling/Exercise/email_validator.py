@@ -33,19 +33,24 @@ while True:
         break
 
     name = re.search(pattern_name, read_email)
-
     domain = re.search(pattern_domain, read_email)
 
-    if len(name.group()) <= 4:
-        raise NameTooShortError('Name must be more than 4 characters')
+    try:
 
-    if read_email.count('@') > 1:
-        raise TooManyAtSymbolsError('Too many @ symbols')
+        if len(name.group()) <= 4:
+            raise NameTooShortError('Name must be more than 4 characters')
 
-    elif read_email.count('@') < 1:
-        raise MustContainAtSymbolError("Email must contain @")
+        if read_email.count('@') > 1:
+            raise TooManyAtSymbolsError('Too many @ symbols')
 
-    if domain.group() not in domains:
-        raise InvalidDomainError(f'Domain must be one of the following: {", ".join(domains)}')
+        elif read_email.count('@') < 1:
+            raise MustContainAtSymbolError("Email must contain @")
 
-    print(f'Email is valid')
+        if domain.group() not in domains:
+            raise InvalidDomainError(f'Domain must be one of the following: {", ".join(domains)}')
+
+        print(f'Email is valid')
+
+    except AttributeError:
+
+        print(f'Invalid email')
