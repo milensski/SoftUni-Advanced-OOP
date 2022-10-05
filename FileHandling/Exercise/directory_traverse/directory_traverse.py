@@ -3,13 +3,13 @@ from os import listdir
 
 path = './resources/Example'
 
-directories = listdir(path)
+files = listdir(path)
 
 extenstions = {}
 
 
-for directory in directories:
-    name, ext = directory.split('.')
+for file in files:
+    name, ext = file.split('.')
 
     if ext not in extenstions:
         extenstions[ext] = [f"{name}.{ext}"]
