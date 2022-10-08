@@ -1,7 +1,8 @@
 import os
 
-from colorama import Fore, Back
 
+from colorama import Fore, Back
+from pyfiglet import Figlet
 
 def board_print():
     for row in board:
@@ -52,6 +53,9 @@ def check_win(board, player_number):
 
     return False
 
+figlet = Figlet(font='big')
+
+print(figlet.renderText('OK'))
 
 rows, cols = 6, 7
 
@@ -59,7 +63,7 @@ board = [["0"] * cols for row in range(rows)]
 
 board_print()
 
-
+print()
 
 player = 1
 
