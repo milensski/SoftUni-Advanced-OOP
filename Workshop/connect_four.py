@@ -55,7 +55,7 @@ def check_win(board, player_number):
 
 figlet = Figlet(font='big')
 
-print(figlet.renderText('OK'))
+print(figlet.renderText('CONNECT 4'))
 
 rows, cols = 6, 7
 
