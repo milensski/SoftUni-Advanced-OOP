@@ -36,9 +36,9 @@ while True:
         if matrix[pos_row][pos_col] == '.':
             matrix[pos_row][pos_col] = value
 
-
     elif command[0] == 'Update':
         direction, value = command[1], command[2]
+
         pos_row, pos_col = move(pos_row, pos_col, direction)
 
         if matrix[pos_row][pos_col].isalnum():
