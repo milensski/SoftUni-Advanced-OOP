@@ -28,5 +28,3 @@ else:
     print('At least Stamat wasn\'t exceeding the maximum caffeine.')
 
 print(f"Stamat is going to sleep with {stamat_caffein} mg caffeine.")
-
-THis is  a test
