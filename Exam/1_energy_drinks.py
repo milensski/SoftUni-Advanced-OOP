@@ -1,10 +1,7 @@
 from collections import deque
 
-
-milligrams_caffeine = deque(map(int,input().split(', ')))
-energy_drinks = deque(map(int,input().split(', ')))
-
-
+milligrams_caffeine = deque(map(int, input().split(', ')))
+energy_drinks = deque(map(int, input().split(', ')))
 
 maximum = 300
 stamat_caffein = 0
@@ -26,7 +23,7 @@ while milligrams_caffeine and energy_drinks:
             stamat_caffein = 0
 
 if len(energy_drinks) > 0:
-    print(f"Drinks left: {', '.join(map(str,energy_drinks))}")
+    print(f"Drinks left: {', '.join(map(str, energy_drinks))}")
 else:
     print('At least Stamat wasn\'t exceeding the maximum caffeine.')
 
