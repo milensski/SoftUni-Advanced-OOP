@@ -15,12 +15,15 @@ class Trainer:
             return f'This pokemon is already caught'
 
     def release_pokemon(self, pokemon_name):
-        for p in self.pokemons:
-            if p.name == pokemon_name:
-                self.pokemons.remove(p)
-                return f'You have released {pokemon_name}'
-        else:
+        try:
+            pokemon = next(filter(lambda p: p.name == pokemon_name, self.pokemons))
+
+        except StopIteration:
             return 'Pokemon is not caught'
+
+        self.pokemons.remove(pokemon)
+
+        return f'You have released {pokemon_name}'
 
     def trainer_data(self):
         result = ''
