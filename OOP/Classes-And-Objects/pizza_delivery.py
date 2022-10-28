@@ -34,6 +34,8 @@ class PizzaDelivery:
         return f"You've ordered pizza {self.name} prepared with {', '.join([f'{k}: {v}' for k, v in self.ingredients.items()])} and the price will be {self.price}lv."
 
 
+
+
 margarita = PizzaDelivery('Margarita', 11, {'cheese': 2, 'tomatoes': 1})
 margarita.add_extra('mozzarella', 1, 0.5)
 margarita.add_extra('cheese', 1, 1)
