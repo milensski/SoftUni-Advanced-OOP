@@ -8,7 +8,7 @@ class Vet:
         self.animals = []
 
     def register_animal(self,animal_name):
-        if Vet.space != len(Vet.animals):
+        if Vet.space != len(self.animals):
             Vet.animals.append(animal_name)
             self.animals.append(animal_name)
             return f"{animal_name} registered in the clinic"
