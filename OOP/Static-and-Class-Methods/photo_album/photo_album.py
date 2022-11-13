@@ -1,3 +1,4 @@
+from math import ceil
 class PhotoAlbum:
     PHOTOS_PER_PAGE = 4
 
@@ -13,7 +14,7 @@ class PhotoAlbum:
 
     @classmethod
     def from_photos_count(cls, photos_count):
-        pages = int(photos_count / PhotoAlbum.PHOTOS_PER_PAGE)
+        pages = ceil(photos_count / PhotoAlbum.PHOTOS_PER_PAGE)
         return cls(pages)
 
     def add_photo(self, label):
