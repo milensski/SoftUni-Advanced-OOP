@@ -1,19 +1,20 @@
 class dictionary_iter:
-    INDEX = 0
+
 
     def __init__(self, dictionary):
         self.dictionary = list(dictionary.items())
 
     def __iter__(self):
+        self.n = 0
         return self
 
     def __next__(self):
-        if len(self.dictionary) <= dictionary_iter.INDEX:
+        if len(self.dictionary) <= self.n:
             raise StopIteration
 
-        result = self.dictionary[dictionary_iter.INDEX]
+        result = self.dictionary[self.n]
 
-        dictionary_iter.INDEX += 1
+        self.n += 1
 
         return result
 
