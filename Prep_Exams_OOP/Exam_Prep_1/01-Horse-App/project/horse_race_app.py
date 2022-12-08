@@ -45,7 +45,7 @@ class HorseRaceApp:
     def add_horse_to_jockey(self, jockey_name: str, horse_type: str):
 
         try:
-            jockey = (list(filter(lambda j: j.name == jockey_name, self.jockeys))[0])
+            jockey = list(filter(lambda j: j.name == jockey_name, self.jockeys))[0]
         except IndexError:
             raise Exception(f'Jockey {jockey_name} could not be found!')
 
@@ -55,27 +55,27 @@ class HorseRaceApp:
             raise Exception(f"Horse breed {horse_type} could not be found!")
 
         if jockey.horse is not None:
-            return f"Jockey {jockey_name} already has a horse."
+            return f"Jockey {jockey.name} already has a horse."
 
         horse.is_taken = True
 
         jockey.horse = horse
 
-        return f"Jockey {jockey_name} will ride the horse {horse.name}."
+        return f"Jockey {jockey.name} will ride the horse {horse.name}."
 
     def add_jockey_to_horse_race(self, race_type: str, jockey_name: str):
 
         try:
-            race = list(filter(lambda r: r.race_type == race_type, self.horse_races))[0]
+            race = next(filter(lambda r: r.race_type == race_type, self.horse_races))
 
-        except IndexError:
+        except StopIteration:
 
             raise Exception(f"Race {race_type} could not be found!")
 
         try:
-            jockey = list(filter(lambda j: j.name == jockey_name, self.jockeys))[0]
+            jockey = next(filter(lambda j: j.name == jockey_name, self.jockeys))
 
-        except IndexError:
+        except StopIteration:
 
             raise Exception(f"Jockey {jockey_name} could not be found!")
 
@@ -96,13 +96,11 @@ class HorseRaceApp:
             race = next(filter(lambda r: r.race_type == race_type, self.horse_races))
 
         except StopIteration:
-            raise f"Race {race_type} could not be found!"
+            raise Exception(f"Race {race_type} could not be found!")
 
         if len(race.jockeys) < 2:
             raise Exception(f"Horse race {race.race_type} needs at least two participants!")
 
-
-        # all_jockeys = list([j.horse.speed for j in race.jockeys])
 
         winner = max(race.jockeys, key=lambda j: j.horse.speed)
 

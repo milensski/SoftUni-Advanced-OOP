@@ -35,20 +35,22 @@ class TestBookstore(TestCase):
 
     def test_receive_limit_in_store_with_enough_space_and_new_book(self):
         result = self.store.receive_book('Java', 5)
-        self.assertEqual(self.store.availability_in_store_by_book_titles['Java'],5)
-        self.assertEqual("5 copies of Java are available in the bookstore.",result)
-        self.assertEqual({'Java': 5},self.store.availability_in_store_by_book_titles)
+        self.assertEqual(self.store.availability_in_store_by_book_titles['Java'], 5)
+        self.assertEqual("5 copies of Java are available in the bookstore.", result)
+        self.assertEqual({'Java': 5}, self.store.availability_in_store_by_book_titles)
 
     def test_receive_limit_in_store_with_enough_space_and_existin_book(self):
         self.store.availability_in_store_by_book_titles = self.books
         result = self.store.receive_book('C#', 5)
-        self.assertEqual(self.store.availability_in_store_by_book_titles['C#'],7)
-        self.assertEqual("7 copies of C# are available in the bookstore.",result)
+        self.assertEqual({'C#': 7, 'Python': 3}, self.store.availability_in_store_by_book_titles)
+
+        self.assertEqual(self.store.availability_in_store_by_book_titles['C#'], 7)
+        self.assertEqual("7 copies of C# are available in the bookstore.", result)
 
     def test_method_sell_book_raise_exception_if_book_not_exist_in_store(self):
         with self.assertRaises(Exception) as e:
             self.store.sell_book('Java', 3)
-        self.assertEqual('Book Java doesn\'t exist!', str(e.exception))
+        self.assertEqual("Book Java doesn't exist!", str(e.exception))
 
     def test_method_sell_book_raise_exception_if_copies_not_enough(self):
         self.store.availability_in_store_by_book_titles = self.books
@@ -59,17 +61,18 @@ class TestBookstore(TestCase):
 
     def test_method_sell_book_successfully(self):
         self.store.availability_in_store_by_book_titles = self.books
-        result = self.store.sell_book("C#",1)
-        self.assertEqual(1,self.store.availability_in_store_by_book_titles['C#'])
-        self.assertEqual("Sold 1 copies of C#",result)
-        self.assertEqual(1,self.store._Bookstore__total_sold_books)
+        result = self.store.sell_book("C#", 2)
+        self.assertEqual(0, self.store.availability_in_store_by_book_titles['C#'])
+        self.assertEqual("Sold 2 copies of C#", result)
+        self.assertEqual(2, self.store.total_sold_books)
 
     def test_str_representation_method(self):
-        self.store.availability_in_store_by_book_titles = self.book
-        self.store._Bookstore__total_sold_books = 1
+        self.store.availability_in_store_by_book_titles = self.books
+
         result = str(self.store)
-        expected = "Total sold books: 1\n" + "Current availability: 2\n" + " - Python: 2 copies"
-        self.assertEqual(expected,result)
+        expected = "Total sold books: 0\n" + "Current availability: 5\n"+" - C#: 2 copies\n" + " - Python: 3 copies"
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     main()
